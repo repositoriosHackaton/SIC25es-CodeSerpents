@@ -1,0 +1,119 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #222121;
+    padding: 10px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #373636;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    border-radius: 25px;
+    color: white;
+    margin-top: 2px;
+}
+
+h1 {
+    margin: 15px 10px;
+}
+
+input[type="text"] {
+    width: 50%;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    border: 1px solid #373636;
+    border-radius: 5px;
+}
+
+#query {
+    background-color: #373636;
+    color: #ece6e6;
+    border: 2px solid #ece6e6;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 17px;
+}
+
+#query:focus {
+    outline: none;
+    background-color: #373636;
+    border-color: #3a94d5;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #258cd6;
+    color: #373636;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+    color: white;
+}
+
+button:hover {
+    background-color: #007ad1;
+}
+
+h2 {
+    margin-top: 20px;
+    margin-left: 20px;
+    color: white;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    color: white;
+}
+
+li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    color: white;
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 900px;
+}
+
+.tweet-text {
+    max-width: 700px;
+    word-wrap: break-word;
+    text-align: left;
+    flex: 1;
+}
+
+#analyzeButton {
+    display: none;
+    width: 100%;
+    margin-top: 15px;
+    background-color: #258cd6;
+    color: white;
+    font-weight: bold;
+}
+
+#analyzeButton:hover {
+    background-color: #007ad1;
+}
+
+
+.category {
+    font-weight: bold;
+    background-color: #007ad1;
+    color: white;
+    margin-left: 10px;
+    border-radius: 10px;
+    padding: 5px 10px;
+    white-space: nowrap;
+    min-width: 175px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}

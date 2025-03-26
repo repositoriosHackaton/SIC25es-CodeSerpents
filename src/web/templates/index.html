@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRISMA AI</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Prisma AI - Analizador de Tweets</h1>
+        <form id="searchForm">
+            <input type="text" id="query" placeholder="Escribe tu búsqueda" required>
+            <button type="submit">Buscar</button>
+        </form>
+        
+        <h2>Resultados:</h2>
+        <ul id="tweetList"></ul>
+        <button id="analyzeButton" style="display:none;">Analizar Tweets</button>
+    </div>
+
+    <script>
+        document.getElementById('searchForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const query = document.getElementById('query').value;
+
+            fetch('/buscar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    query: query
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const tweetList = document.getElementById('tweetList');
+                tweetList.innerHTML = '';
+                
+                if (data.length > 0) {
+                    document.getElementById('analyzeButton').style.display = 'block';
+                }
+
+                data.forEach(tweet => {
+                    const listItem = document.createElement('li');
+                    listItem.setAttribute('data-id', tweet.id);
+                    listItem.setAttribute('data-text', tweet.text);
+                    listItem.innerHTML = `${tweet.text} <span class="category"></span>`;
+                    tweetList.appendChild(listItem);
+                });
+            });
+        });
+
+        document.getElementById('analyzeButton').addEventListener('click', function() {
+            const tweets = Array.from(document.querySelectorAll('#tweetList li')).map(item => ({
+                id: item.getAttribute('data-id'),
+                text: item.getAttribute('data-text')
+            }));
+
+            fetch('/analizar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ tweets: tweets })
+            })
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(tweet => {
+                    const listItem = document.querySelector(`li[data-id="${tweet.id}"]`);
+                    if (listItem) {
+                        listItem.querySelector('.category').textContent = ` Category: ${tweet.categoria}`;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
